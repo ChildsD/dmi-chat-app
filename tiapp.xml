@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">GhjhqaVOvPGuY3WCWkhGk79BPJEDLwfZ</property>
+    <property name="acs-oauth-key-production" type="string">qsVcJPxet1ugVStUlyLhgkrd0jeOzQw9</property>
+    <property name="acs-api-key-production" type="string">l1P7jCQVag1uQ8S2SOQ98piHjxJO0Hbo</property>
+    <property name="acs-oauth-secret-development" type="string">EiK6O5TVPPhaCfKTjPUhYIrwE7SsptIG</property>
+    <property name="acs-oauth-key-development" type="string">K7aaq1p6vuv9TWwg65ikhUC3KZmibv2A</property>
+    <property name="acs-api-key-development" type="string">KKuYYAbCSQvR4z0uqeirckmQ53e21qXj</property>
+    <deployment-targets>
+        <target device="mobileweb">false</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>2.0.1.GA2</sdk-version>
+    <id>com.UTexas.chat</id>
+    <name>chat</name>
+    <version>1.0</version>
+    <publisher>Daniel</publisher>
+    <url>http://utexas.edu</url>
+    <description>Chat application using the Node.js chat app at http://quiet-journey-1236.herokuapp.com/</description>
+    <copyright>2012 by Daniel</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>6fcd8c9b-01cd-442f-b71b-4403765f1b7a</guid>
+    <property name="ti.ui.defaultunit">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs" version="2.0.5">ti.cloud</module>
+    </modules>
+</ti:app>
