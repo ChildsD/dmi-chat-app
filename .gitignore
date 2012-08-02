@@ -7,6 +7,7 @@ build/
 LICENSE
 manifest
 tiapp.xml
+*.log
 
 # OS generated files #
 ######################
