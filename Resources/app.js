@@ -1,9 +1,6 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#BE3E1D');
 
-// create tab group
-var tabGroup = Titanium.UI.createTabGroup();
-
 //***---------------------       WINDOW 1       ---------------------***
 
 //
@@ -11,16 +8,12 @@ var tabGroup = Titanium.UI.createTabGroup();
 //
 var win1 = Titanium.UI.createWindow({  
     title:'Tab 1',
-    navBarHidden: true,
-    tabBarHidden: true
+    navBarHidden: true
+    // tabBarHidden: true
 });
 
 win1.addEventListener("open", function(e) {
 	enterUser.focus();
-});
-var tab1 = Titanium.UI.createTab({  
-    title:'Tab 1',
-    window:win1
 });
 
 //-----CREATE TITLE VIEW-----
@@ -96,7 +89,8 @@ getStarted.addEventListener("click", function(e){
 	if(enterUser.value != "" && enterCode.value != "")
 	{
 		webView.reload();
-		tabGroup.setActiveTab(1);
+		win1.close();
+		win2.open();
 	}
 	
 	else
@@ -168,17 +162,19 @@ var webView = Titanium.UI.createWebView({
 var win2 = Titanium.UI.createWindow({  
     title:'',
     backgroundColor:'#fff',
-    height: 'auto',
-    tabBarHidden: true
+    height: 'auto'
+});
+
+var keyLabel = Titanium.UI.createLabel({
+	text: "Room key: ",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	top: 0,
+	width: "100%",
+	height: 50
 });
 
 win2.addEventListener("open", function(e) {
 	textField.focus();
-});
-
-var tab2 = Titanium.UI.createTab({  
-    title:'Tab 2',
-    window:win2
 });
 
 win2.hide();
@@ -195,7 +191,7 @@ var exit = Titanium.UI.createButton({
 // win2.add(exit);
 exit.addEventListener("click", function(e){
 	win2.remove(webView);
-	tabGroup.setActiveTab(0);
+	win1.open();
 	enterUser.focus();
 });
 
@@ -213,7 +209,8 @@ webView.addEventListener('load', function(e) {
 		successfullLogin = webView.evalJS("success;");
 		if(successfullLogin == "false")
 		{
-			tabGroup.setActiveTab(0);
+			win1.open();
+			win2.close();
 			enterUser.value = "";
 			enterCode.value = "";
 			enterUser.focus();
@@ -310,6 +307,7 @@ textField.addEventListener("focus", function(e){
 });
 
 var tableContainer = Titanium.UI.createScrollView({
+	top: 50
 	// contentHeight: 20
 	// height: Ti.Platform.displayCaps.platformHeight + 10
 });
@@ -353,7 +351,7 @@ showUsersButton.addEventListener("click", function(e){
 	// textField.bottom = 0;
 	// textField.height = 'auto';
 // });
-
+win2.add(keyLabel);
 win2.add(tableContainer);
 win2.add(textField);
 // win2.add(showUsersButton);
@@ -362,9 +360,4 @@ win2.add(textField);
 //
 //  add tabs
 //
-tabGroup.addTab(tab1);  
-tabGroup.addTab(tab2);  
-
-
-// open tab group
-tabGroup.open();
+win1.open();
