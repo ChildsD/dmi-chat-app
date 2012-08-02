@@ -96,7 +96,11 @@ getStarted.addEventListener("click", function(e){
 	else
 	{
 		alert("Please enter a username and password.");
-		enterUser.focus();
+		if(enterUser.value == "")
+			enterUser.focus();
+		
+		else
+			enterCode.focus();
 	}
 });
 
@@ -167,7 +171,14 @@ var win2 = Titanium.UI.createWindow({
 
 var keyLabel = Titanium.UI.createLabel({
 	text: "Room key: ",
+	color: "#FFF",
+	backgroundGradient:{type:'linear',
+		colors:['#DA6A00','#BE3E1D'],
+		startPoint:{x:0,y:0},
+		endPoint:{x:0,y:50},
+		backFillStart:false},
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	font: {fontFamily: 'Arial', fontSize: 26},
 	top: 0,
 	width: "100%",
 	height: 50
@@ -198,7 +209,8 @@ exit.addEventListener("click", function(e){
 webView.addEventListener('load', function(e) {
 	tempWin.open();
 	webView.evalJS("setCreds('" + enterCode.value + "','" + enterUser.value + "');");
-	win2.title = "Room key: " + enterCode.value;
+	keyLabel.setText("Room key: " + enterCode.value);
+	// win2.title = "Room key: " + enterCode.value;
 	var posts = "";
 	var size = 0;
 	var successfullLogin = webView.evalJS("success;");
@@ -210,7 +222,9 @@ webView.addEventListener('load', function(e) {
 		if(successfullLogin == "false")
 		{
 			win1.open();
-			win2.close();
+			// win2.close();
+			tempWin.close();
+			alert("Error: Incorrect Password");
 			enterUser.value = "";
 			enterCode.value = "";
 			enterUser.focus();
