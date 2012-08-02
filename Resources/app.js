@@ -48,7 +48,7 @@ var enterUser = Titanium.UI.createTextField({
 	left: 20,
 	width: 100,
 	backgroundColor: "#FFF",
-	autocapitalization: false,
+	// autocapitalization: false,
 	autocorrect: false
 });
 
@@ -57,7 +57,7 @@ var enterCode = Titanium.UI.createTextField({
 	right: 20,
 	width: 100,
 	backgroundColor: "#FFF",
-	autocapitalization: false,
+	// autocapitalization: false,
 	autocorrect: false
 });
 
