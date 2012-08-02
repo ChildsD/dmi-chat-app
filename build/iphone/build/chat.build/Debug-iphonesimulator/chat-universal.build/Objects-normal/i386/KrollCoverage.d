@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/KrollCoverage.m
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/KrollCoverage.m

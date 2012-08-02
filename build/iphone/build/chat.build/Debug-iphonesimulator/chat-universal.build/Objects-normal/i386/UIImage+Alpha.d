@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/UIImage+Alpha.m \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/UIImage+Alpha.h
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/UIImage+Alpha.m \
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/UIImage+Alpha.h

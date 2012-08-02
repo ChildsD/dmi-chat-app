@@ -5,7 +5,7 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 07/06/12 16:51
+Starting build at 08/01/12 19:05
 
 Build details:
 
@@ -19,7 +19,7 @@ Script arguments:
    /Users/Daniel/Library/Application Support/Titanium/mobilesdk/osx/2.0.1.GA2/iphone/builder.py
    simulator
    5.0
-   /Users/Daniel/Documents/Titanium Studio Workspace/chat
+   /Users/Daniel/Documents/Titanium Studio Workspace/dmi-chat-app
    com.UTexas.chat
    chat
    universal
@@ -33,7 +33,7 @@ Xcode path is: /Developer
 
 
 githash=999c68a, existing_git_hash=999c68a
-writing contents of /Users/Daniel/Documents/Titanium Studio Workspace/chat/build/iphone/project.xcconfig:
+writing contents of /Users/Daniel/Documents/Titanium Studio Workspace/dmi-chat-app/build/iphone/project.xcconfig:
 
 TI_VERSION=2.0.1.GA2
 TI_SDK_DIR=/Users/Daniel/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone

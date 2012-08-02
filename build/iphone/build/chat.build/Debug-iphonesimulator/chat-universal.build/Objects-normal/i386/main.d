@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/main.m
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/main.m

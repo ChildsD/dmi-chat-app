@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/GDataXMLNode.m \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/GDataXMLNode.h \
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/GDataXMLNode.m \
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/GDataXMLNode.h \
   /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/usr/include/libxml2/libxml/tree.h \
   /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/usr/include/libxml2/libxml/xmlversion.h \
   /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk/usr/include/libxml2/libxml/xmlexports.h \

@@ -1,5 +1,5 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
-Titanium.UI.setBackgroundColor('#A60400');
+Titanium.UI.setBackgroundColor('#BE3E1D');
 
 // create tab group
 var tabGroup = Titanium.UI.createTabGroup();
@@ -10,8 +10,13 @@ var tabGroup = Titanium.UI.createTabGroup();
 // create controls tab and root window
 //
 var win1 = Titanium.UI.createWindow({  
-    title:'Tab 1' //I REMOVED THE COMMA!
-    // backgroundColor:'#fff'
+    title:'Tab 1',
+    navBarHidden: true,
+    tabBarHidden: true
+});
+
+win1.addEventListener("open", function(e) {
+	enterUser.focus();
 });
 var tab1 = Titanium.UI.createTab({  
     title:'Tab 1',
@@ -20,70 +25,84 @@ var tab1 = Titanium.UI.createTab({
 
 //-----CREATE TITLE VIEW-----
 var titleView = Titanium.UI.createView({
-	top: 50,
-	width: "auto",
-	height: "150",
-	backgroundColor: "#FF0700"
+	top: 65,
+	width: "80%",
+	borderRadius: 8,
+	borderWidth: 2,
+	borderColor: "#6B2700",
+	height: 150,
+	backgroundColor: "#DA6A00"
 });
 
 var label1 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'I am Window 1',
-	font:{fontSize:20,fontFamily:'Helvetica Neue'},
-	textAlign:'center',
-	width:'auto'
+	top: 8,
+	text: "DMI Chat",
+	font: {fontSize: 36, fontFamily: 'Arial', fontWeight: 'bold'},
+	color: "#fff"
 });
 
+
+
 var enterUser = Titanium.UI.createTextField({
-	hintText: "username",
+	hintText: "Username",
 	left: 20,
-	width: 70,
+	width: 100,
 	backgroundColor: "#FFF",
 	autocapitalization: false,
 	autocorrect: false
 });
 
 var enterCode = Titanium.UI.createTextField({
-	hintText: "password",
+	hintText: "Password",
 	right: 20,
-	width: 70,
+	width: 100,
 	backgroundColor: "#FFF",
 	autocapitalization: false,
 	autocorrect: false
 });
 
+enterUser.addEventListener("return", function(e) {
+	enterCode.focus();
+});
+
+enterCode.addEventListener("return", function(e) {
+	getStarted.fireEvent("click");
+})
+
 var getStarted = Titanium.UI.createButton({
-	bottom: 25,
+	bottom: 20,
+	// left: 35,
 	width: "auto",
 	textAlign: "center",
 	title: "Get started!"
 })
 
-var about = Titanium.UI.createButton({
-	bottom: 5,
-	width: "auto",
-	textAlign: "center",
-	title: "About"
-})
-
 var label2 = Titanium.UI.createLabel({
-	color:'#999',
-	text:'Chatty Cathy (main app title screen)',
-	font:{fontSize:20,fontFamily:'Helvetica Neue'},
+	color:'#FFF',
+	text:'Please Log In',
+	top: 20,
+	font:{fontSize:20,fontFamily:'Arial Black'},
 	textAlign:'center',
-	top: 0,
 	width:'auto'
 });
 
-getStarted.addEventListener("touchend", function(e){
+var loadingIndicator = Titanium.UI.createActivityIndicator({
+	width:200,
+	height:100,
+	message: 'Loading...',
+	color: 'FFFFFF'
+});
+getStarted.addEventListener("click", function(e){
 	if(enterUser.value != "" && enterCode.value != "")
 	{
+		webView.reload();
 		tabGroup.setActiveTab(1);
 	}
 	
 	else
 	{
-		alert("Please enter a username and password. Username = " + enterUser.value + "");
+		alert("Please enter a username and password.");
+		enterUser.focus();
 	}
 });
 
@@ -91,7 +110,6 @@ getStarted.addEventListener("touchend", function(e){
 titleView.add(enterUser);
 titleView.add(enterCode);
 titleView.add(getStarted);
-titleView.add(about);
 titleView.add(label2);
 
 var contactButton = Titanium.UI.createButton({
@@ -107,66 +125,240 @@ var settingsButton = Titanium.UI.createButton({
 	title: "Settings"
 })
 
-win1.add(contactButton);
-win1.add(settingsButton);
+// win1.add(contactButton);
+// win1.add(settingsButton);
 win1.add(label1);
 win1.add(titleView);
 
 //***---------------------       WINDOW 2       ---------------------***
 
-var tableView = Titanium.UI.createTableView()
+var tempWin = Titanium.UI.createWindow();
+tempWin.add(loadingIndicator);
+loadingIndicator.show();
+
+
+var textField = Titanium.UI.createTextArea({
+	bottom: 215,
+	height: 'auto',
+	minHeight: 15,
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderColor: 'black',
+	borderRadius: 5,
+	hintText: "Enter text",
+	width: '100%',
+	font: {fontFamily: 'Arial', fontSize: 22}
+});
+
+
+var postNums = 0;
+var tableView = Titanium.UI.createTableView({
+	top: 0,
+	height: "42%"
+});
 
 var webView = Titanium.UI.createWebView({
 	top: 0,
 	left: 0,
 	url: "http://quiet-journey-1236.herokuapp.com/",
-	visible: true
+	visible: false
 });
 //
 // create base UI tab and root window
 //
 var win2 = Titanium.UI.createWindow({  
-    title:'Tab 2',
-    backgroundColor:'#fff'
+    title:'',
+    backgroundColor:'#fff',
+    height: 'auto',
+    tabBarHidden: true
 });
+
+win2.addEventListener("open", function(e) {
+	textField.focus();
+});
+
 var tab2 = Titanium.UI.createTab({  
-    // icon:'KS_nav_views.png',
     title:'Tab 2',
     window:win2
 });
 
-
-
-
+win2.hide();
 win2.add(webView);
 
-//Listen for prompt from index.html asking for creation of room key
-Titanium.App.addEventListener('app:codePrompt1', function(e) {
-	
-	webView.evalJS("'mobileCode = " + enterCode.value + ";'");
-	// webView.evalJS(mobileUser = "" + enterUser.value + "");
+var exit = Titanium.UI.createButton({
+	top: 0,
+	left: 20,
+	width: 'auto',
+	title: "Log out",
+	zIndex: 10
+});
+
+// win2.add(exit);
+exit.addEventListener("click", function(e){
+	win2.remove(webView);
+	tabGroup.setActiveTab(0);
+	enterUser.focus();
 });
 
 webView.addEventListener('load', function(e) {
-	alert("webview load event heard: " + enterUser.value);
+	tempWin.open();
 	webView.evalJS("setCreds('" + enterCode.value + "','" + enterUser.value + "');");
-	// var chatLog = webView.evalJS("document.getElementById('post-screen').childNodes;");
-	// alert("first chat should is: " + chatLog[1].nodeValue);
+	win2.title = "Room key: " + enterCode.value;
+	var posts = "";
+	var size = 0;
+	var successfullLogin = webView.evalJS("success;");
+	
+	// alert(successfullLogin);
+	while(successfullLogin == "")
+	{
+		successfullLogin = webView.evalJS("success;");
+		if(successfullLogin == "false")
+		{
+			tabGroup.setActiveTab(0);
+			enterUser.value = "";
+			enterCode.value = "";
+			enterUser.focus();
+		}
+	}
+	
+	
+	if(successfullLogin == "true")
+	{
+		setInterval(function() {
+		posts = webView.evalJS("postsToMobile();");
+		var newPosts = JSON.parse(posts);
+		if(newPosts.length > size)
+		{
+			for(var i = size; i < newPosts.length; i++)
+			{	
+				var rowColor = "#FFF";
+				if(i % 2)
+				{
+					rowColor = "#F3F3F4";
+				}
+				
+				var padding = 5;
+				var label = Titanium.UI.createLabel({
+					height : Titanium.UI.SIZE, 
+					text: newPosts[i],
+					width: "100%",
+					textAlign: "left",
+					top: padding,
+					bottom: padding,
+					left: padding,
+					right: padding,
+					font: {fontFamily: 'Arial', fontSize: 22}
+				});
+				
+				var rowHeight = Math.max(Titanium.UI.SIZE + 8, label.getHeight);
+				
+				var row = Titanium.UI.createTableViewRow({
+					height : label.getHeight,
+					backgroundColor: rowColor
+					});
+				// row.height += 8;	
+				row.add(label);
+				tableView.appendRow(row);
+				postNums++;
+			}
+			size = (newPosts.length);
+			var temp = size - 1;
+			// tableView.scrollToIndex(postNums);
+			tableView.scrollToIndex(temp);
+			postNums = temp;
+			// switch (Titanium.Platform.osname)
+			// {
+			    // case 'android': 
+			        // tableView.scrollToIndex(tableView.data.length);
+			        // break;
+			    // case 'iphone':
+			        // tableView.scrollToIndex(50,{position:Titanium.UI.iPhone.TableViewScrollPosition.BOTTOM});
+			        // break;
+			// }
+	}
+	tempWin.close();
+	loadingIndicator.hide();
+	win2.show();
+	textField.focus();
+	}, 2000);
+	}
+	
 });
 
-Titanium.App.addEventListener('addRow', function(e){
-	Ti.API.info('here is a message from the webview : '+e.name);
-	alert("marker");
-	alert("test: chat shoule be: " + e.name);
-	//Now create the table row to append to our app
-	// var row = Titanium.UI.createTableViewRow({
-		// title: "tempTitle",
-		// height: auto
-	// });
-	// tableView.appendRow(row);
+textField.addEventListener("return", function(e) {
+	if(e.source.value != null)
+	{
+		webView.evalJS("document.getElementById('chat_input').value = '"+e.source.value+"';");
+		webView.evalJS("$('chat_input').blur();");
+		webView.evalJS("$('#send').focus().click();");
+		e.source.value = "";
+		textField.focus();
+		textField.height = 'auto';
+		tableView.scrollToIndex(postNums);
+	}
+
 });
 
-// win2.add(tableView);
+textField.addEventListener("blur", function(e){
+	tableView.height = "95%";
+	textField.bottom = 0;
+});
+
+textField.addEventListener("focus", function(e){
+	tableView.height = "42%";
+	textField.bottom = 215;
+	tableView.scrollToIndex(postNums);
+});
+
+var tableContainer = Titanium.UI.createScrollView({
+	// contentHeight: 20
+	// height: Ti.Platform.displayCaps.platformHeight + 10
+});
+
+tableView.addEventListener("click", function(e){
+	textField.blur();
+});
+
+tableContainer.add(tableView);
+
+usersList = Titanium.UI.createTableView(function(e){
+	height: 300
+	// visible: false
+});
+usersList.hide();
+
+showUsersButton = Titanium.UI.createButton({
+	top: 0,
+	title: "USERS"
+});
+
+function showUsers() {
+	usersList.show();
+}
+
+showUsersButton.addEventListener("click", function(e){
+	showUsers();
+});
+
+// win2.addEventListener("click", function(e) {
+	// textField.blur();
+	// textField.bottom = 0;
+// });
+
+// textField.addEventListener("focus", function(e){
+	// textField.height = 'auto';
+	// textField.bottom = textField.keyboardToolbarHeight;
+// });
+// 
+// textField.addEventListener("blur", function(e){
+	// textField.bottom = 0;
+	// textField.height = 'auto';
+// });
+
+win2.add(tableContainer);
+win2.add(textField);
+// win2.add(showUsersButton);
+// win2.add(usersList);
+
 //
 //  add tabs
 //

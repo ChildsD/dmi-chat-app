@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/ASI/Reachability.m \
-  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/chat/build/iphone/Classes/ASI/Reachability.h
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/ASI/Reachability.m \
+  /Users/Daniel/Documents/Titanium\ Studio\ Workspace/dmi-chat-app/build/iphone/Classes/ASI/Reachability.h

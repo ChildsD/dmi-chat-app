@@ -1,1 +1,1 @@
-/Users/Daniel/Documents/Titanium Studio Workspace/chat/Resources/app.js
+/Users/Daniel/Documents/Titanium Studio Workspace/dmi-chat-app/Resources/app.js
