@@ -1,6 +1,12 @@
 # Logs and databases #
 ######################
-
+.git/
+build/
+.settings/
+.project
+LICENSE
+manifest
+tiapp.xml
 
 # OS generated files #
 ######################

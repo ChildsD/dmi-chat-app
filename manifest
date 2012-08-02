@@ -1,8 +1,0 @@
-#appname:chat
-#publisher:Daniel
-#url:http://utexas.edu
-#image:appicon.png
-#appid:com.UTexas.chat
-#desc:Chat application using the Node.js chat app at http://quiet-journey-1236.herokuapp.com/
-#type:ipad
-#guid:6fcd8c9b-01cd-442f-b71b-4403765f1b7a
