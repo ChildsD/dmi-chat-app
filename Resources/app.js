@@ -7,8 +7,8 @@ Titanium.UI.setBackgroundColor('#BE3E1D');
 // create controls tab and root window
 //
 var win1 = Titanium.UI.createWindow({  
-    title:'Tab 1',
-    navBarHidden: true
+    title:'Tab 1'
+    // navBarHidden: true
     // tabBarHidden: true
 });
 
