@@ -36,7 +36,7 @@ var label1 = Titanium.UI.createLabel({
 var enterUser = Titanium.UI.createTextField({
 	hintText: "Username",
 	left: 20,
-	width: 100,
+	width: 105,
 	backgroundColor: "#FFF",
 	// autocapitalization: false,
 	autocorrect: false
@@ -45,7 +45,7 @@ var enterUser = Titanium.UI.createTextField({
 var enterCode = Titanium.UI.createTextField({
 	hintText: "Password",
 	right: 20,
-	width: 100,
+	width: 105,
 	backgroundColor: "#FFF",
 	// autocapitalization: false,
 	autocorrect: false
@@ -60,7 +60,8 @@ enterCode.addEventListener("return", function(e) {
 })
 
 var getStarted = Titanium.UI.createButton({
-	bottom: 20,
+	bottom: "7%",
+	height: "20%",
 	// left: 35,
 	width: "auto",
 	textAlign: "center",
@@ -76,12 +77,6 @@ var label2 = Titanium.UI.createLabel({
 	width:'auto'
 });
 
-var loadingIndicator = Titanium.UI.createActivityIndicator({
-	width:200,
-	height:100,
-	message: 'Loading...',
-	color: 'FFFFFF'
-});
 getStarted.addEventListener("click", function(e){
 	if(enterUser.value != "" && enterCode.value != "")
 	{

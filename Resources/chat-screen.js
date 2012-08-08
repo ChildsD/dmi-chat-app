@@ -1,5 +1,5 @@
 //***---------------------       Chat Window      ---------------------***
-
+Titanium.include('loading.js');
 
 var textField = Titanium.UI.createTextArea({
 	bottom: 215,
@@ -13,7 +13,6 @@ var textField = Titanium.UI.createTextArea({
 	font: {fontFamily: 'Arial', fontSize: 22}
 });
 
-
 var postNums = 0;
 var tableView = Titanium.UI.createTableView({
 	top: 0,
@@ -26,6 +25,7 @@ var webView = Titanium.UI.createWebView({
 	url: "http://quiet-journey-1236.herokuapp.com/",
 	visible: false
 });
+
 //
 // create base UI tab and root window
 //
@@ -51,29 +51,17 @@ var keyLabel = Titanium.UI.createLabel({
 });
 
 win2.addEventListener("open", function(e) {
-	textField.focus();
+	tempWin.open();
+	// loadingIndicator.show();
+	// textField.focus();
 });
 
 win2.hide();
 win2.add(webView);
 
-var exit = Titanium.UI.createButton({
-	top: 0,
-	left: 20,
-	width: 'auto',
-	title: "Log out",
-	zIndex: 10
-});
-
-// win2.add(exit);
-exit.addEventListener("click", function(e){
-	win2.remove(webView);
-	win1.open();
-	enterUser.focus();
-});
-
 webView.addEventListener('load', function(e) {
-	tempWin.open();
+	// tempWin.open();
+	// loadingIndicator.show();
 	webView.evalJS("setCreds('" + enterCode.value + "','" + enterUser.value + "');");
 	keyLabel.setText("Room key: " + enterCode.value);
 	// win2.title = "Room key: " + enterCode.value;
@@ -82,7 +70,7 @@ webView.addEventListener('load', function(e) {
 	var successfullLogin = webView.evalJS("success;");
 	
 	// alert(successfullLogin);
-	while(successfullLogin == "")
+	while((successfullLogin.toLowerCase() != "false" && successfullLogin.toLowerCase() != "true"))
 	{
 		successfullLogin = webView.evalJS("success;");
 		if(successfullLogin == "false")
@@ -96,8 +84,6 @@ webView.addEventListener('load', function(e) {
 			enterUser.focus();
 		}
 	}
-	
-	
 	if(successfullLogin == "true")
 	{
 		setInterval(function() {
@@ -115,7 +101,7 @@ webView.addEventListener('load', function(e) {
 				
 				var padding = 5;
 				var label = Titanium.UI.createLabel({
-					height : Titanium.UI.SIZE, 
+					height : Titanium.UI.SIZE,
 					text: newPosts[i],
 					width: "100%",
 					textAlign: "left",
@@ -129,7 +115,8 @@ webView.addEventListener('load', function(e) {
 				var rowHeight = Math.max(Titanium.UI.SIZE + 8, label.getHeight);
 				
 				var row = Titanium.UI.createTableViewRow({
-					height : label.getHeight,
+					// height: label.getHeight,
+					height: "auto",
 					backgroundColor: rowColor
 					});
 				// row.height += 8;	
@@ -142,23 +129,19 @@ webView.addEventListener('load', function(e) {
 			// tableView.scrollToIndex(postNums);
 			tableView.scrollToIndex(temp);
 			postNums = temp;
-			// switch (Titanium.Platform.osname)
-			// {
-			    // case 'android': 
-			        // tableView.scrollToIndex(tableView.data.length);
-			        // break;
-			    // case 'iphone':
-			        // tableView.scrollToIndex(50,{position:Titanium.UI.iPhone.TableViewScrollPosition.BOTTOM});
-			        // break;
-			// }
 	}
+	// loadingIndicator.hide();
 	tempWin.close();
-	loadingIndicator.hide();
 	win2.show();
+	
 	textField.focus();
 	}, 2000);
 	}
-	
+	else
+	{
+		alert(webView.getHtml());
+	}
+	//alert(webView.getHtml());
 });
 
 textField.addEventListener("return", function(e) {
@@ -187,9 +170,8 @@ textField.addEventListener("focus", function(e){
 });
 
 var tableContainer = Titanium.UI.createScrollView({
-	top: 50
-	// contentHeight: 20
-	// height: Ti.Platform.displayCaps.platformHeight + 10
+	top: 50,
+	scrollType: "vertical"
 });
 
 tableView.addEventListener("click", function(e){
@@ -217,22 +199,6 @@ showUsersButton.addEventListener("click", function(e){
 	showUsers();
 });
 
-// win2.addEventListener("click", function(e) {
-	// textField.blur();
-	// textField.bottom = 0;
-// });
-
-// textField.addEventListener("focus", function(e){
-	// textField.height = 'auto';
-	// textField.bottom = textField.keyboardToolbarHeight;
-// });
-// 
-// textField.addEventListener("blur", function(e){
-	// textField.bottom = 0;
-	// textField.height = 'auto';
-// });
 win2.add(keyLabel);
 win2.add(tableContainer);
 win2.add(textField);
-// win2.add(showUsersButton);
-// win2.add(usersList);
