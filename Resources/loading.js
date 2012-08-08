@@ -8,10 +8,10 @@ var loadingIndicator = Titanium.UI.createActivityIndicator({
 });
 
 var tempWin = Titanium.UI.createWindow({
-	backgroundColor: "#000"
+	// backgroundColor: "#BE3E1D"
 });
 tempWin.add(loadingIndicator);
-loadingIndicator.hide();
+loadingIndicator.show();
 
 // var loadingView = Titanium.UI.createView({
 	// height: "100%",

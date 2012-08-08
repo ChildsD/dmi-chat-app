@@ -60,8 +60,8 @@ win2.hide();
 win2.add(webView);
 
 webView.addEventListener('load', function(e) {
-	// tempWin.open();
-	// loadingIndicator.show();
+	tempWin.open();
+	loadingIndicator.show();
 	webView.evalJS("setCreds('" + enterCode.value + "','" + enterUser.value + "');");
 	keyLabel.setText("Room key: " + enterCode.value);
 	// win2.title = "Room key: " + enterCode.value;
@@ -75,10 +75,15 @@ webView.addEventListener('load', function(e) {
 		successfullLogin = webView.evalJS("success;");
 		if(successfullLogin == "false")
 		{
-			win1.open();
+			
 			// win2.close();
+			win1.open();
 			tempWin.close();
 			alert("Error: Incorrect Password");
+	
+			if(Titanium.Platform.osname == "android")
+				loadingIndicator.hide();
+	
 			enterUser.value = "";
 			enterCode.value = "";
 			enterUser.focus();
@@ -130,16 +135,12 @@ webView.addEventListener('load', function(e) {
 			tableView.scrollToIndex(temp);
 			postNums = temp;
 	}
-	// loadingIndicator.hide();
+	loadingIndicator.hide();
 	tempWin.close();
 	win2.show();
 	
 	textField.focus();
 	}, 2000);
-	}
-	else
-	{
-		alert(webView.getHtml());
 	}
 	//alert(webView.getHtml());
 });

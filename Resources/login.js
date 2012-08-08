@@ -10,6 +10,8 @@ var win1 = Titanium.UI.createWindow({
 });
 
 win1.addEventListener("open", function(e) {
+	if(Titanium.Platform.osname == "android")
+		loadingIndicator.hide();
 	enterUser.focus();
 });
 
@@ -90,9 +92,10 @@ getStarted.addEventListener("click", function(e){
 		alert("Please enter a username and password.");
 		if(enterUser.value == "")
 			enterUser.focus();
-		
 		else
 			enterCode.focus();
+		if(Titanium.Platform.osname == "android")
+			loadingIndicator.hide();
 	}
 });
 

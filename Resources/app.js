@@ -3,5 +3,10 @@ Titanium.UI.setBackgroundColor('#BE3E1D');
 Titanium.include('login.js');
 Titanium.include('chat-screen.js');
 
-// loadingIndicator.hide();
+
+if(Titanium.Platform.osname == "android")
+{
+	loadingIndicator.hide();
+	// alert("android!");
+}
 win1.open();
