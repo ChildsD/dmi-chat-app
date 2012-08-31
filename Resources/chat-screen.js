@@ -64,19 +64,16 @@ webView.addEventListener('load', function(e) {
 	loadingIndicator.show();
 	webView.evalJS("setCreds('" + enterCode.value + "','" + enterUser.value + "');");
 	keyLabel.setText("Room key: " + enterCode.value);
-	// win2.title = "Room key: " + enterCode.value;
 	var posts = "";
 	var size = 0;
 	var successfullLogin = webView.evalJS("success;");
 	
-	// alert(successfullLogin);
 	while((successfullLogin.toLowerCase() != "false" && successfullLogin.toLowerCase() != "true"))
 	{
 		successfullLogin = webView.evalJS("success;");
 		if(successfullLogin == "false")
 		{
 			
-			// win2.close();
 			win1.open();
 			tempWin.close();
 			alert("Error: Incorrect Password");
@@ -175,15 +172,10 @@ var tableContainer = Titanium.UI.createScrollView({
 	scrollType: "vertical"
 });
 
-tableView.addEventListener("click", function(e){
-	textField.blur();
-});
-
 tableContainer.add(tableView);
 
 usersList = Titanium.UI.createTableView(function(e){
 	height: 300
-	// visible: false
 });
 usersList.hide();
 
